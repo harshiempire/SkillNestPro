@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillNest</title>
+    <link rel="stylesheet" href="lobby.css">
+</head>
+<body>
+    <main id="lobby-container">
+        <div id="form-container">
+            <div id="form-header">
+                <h2>SkillNest</h2>
+            </div>
+
+            <div id="form-content">
+                <form id="join-form">
+                    <input type="text" name="invite_link" placeholder="Enter Invite Code" required>
+                    <button type="submit">Join Room</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById('join-form');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inviteCode = e.target.invite_link.value.trim();
+            if (inviteCode) {
+                animateFormSuccess(); // Call animation on successful form submission
+                setTimeout(() => {
+                    window.location = `index.html?room=${inviteCode}`;
+                }, 1000); // Redirect after animation completes (1 second delay)
+            } else {
+                alert('Please enter a valid invite code.');
+            }
+        });
+
+        function animateFormSuccess() {
+            const formContainer = document.getElementById('form-container');
+            formContainer.classList.add('success');
+
+            // Remove success class after animation completes
+            setTimeout(() => {
+                formContainer.classList.remove('success');
+            }, 2000); // Remove class after 2 seconds (adjust as needed)
+        }
+    </script>
+</body>
+</html>
